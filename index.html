@@ -54,7 +54,7 @@
       const renderSymbol = (symbol) => <span className={`symbol ${getSymbolClassName(symbol)}`}>{symbol}</span>
 
       const chengeZnak = (ind) =>{
-        if(cells[ind]){
+        if(cells[ind] ?? winnerSequence){
           return
         }
         const copyCells = cells.slice()
@@ -67,10 +67,12 @@
 
       }
 
+      const winSymbol = winnerSequence ? cells[winnerSequence?.[0]] : undefined
+
       return (
         <div className="game">
           <div className="game-info">
-            {winnerSequence ? "Победитель: " : "Ход: " } {renderSymbol(winnerSequence ? cells[winnerSequence?.[0]] : currentStep)}
+            {winnerSequence ? "Победитель: " : "Ход: " } {renderSymbol(winSymbol ?? currentStep)}
           </div>
           <div className="game-field">
             {cells.map((symbol, index) => {
